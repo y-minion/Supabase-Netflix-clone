@@ -5,6 +5,7 @@ import { ThemeProvider } from "config/material-tailwind-theme-provider";
 import ReactQueryClientProvider from "config/ReactQueryClientProvider";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import RecoilProvider from "config/RecoilProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -41,13 +42,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ReactQueryClientProvider>
-          <ThemeProvider>
-            <Header />
-            {children}
-            <Footer />
-          </ThemeProvider>
-        </ReactQueryClientProvider>
+        <RecoilProvider>
+          <ReactQueryClientProvider>
+            <ThemeProvider>
+              <Header />
+              {children}
+              <Footer />
+            </ThemeProvider>
+          </ReactQueryClientProvider>
+        </RecoilProvider>
       </body>
     </html>
   );
