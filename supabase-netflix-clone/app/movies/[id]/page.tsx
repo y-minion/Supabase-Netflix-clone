@@ -1,6 +1,22 @@
 import { getMovie } from "actions/movieActions";
 import UI from "./ui";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const { id } = await params;
+  const { title, overview, image_url } = await getMovie(Number(id));
+  return {
+    title,
+    description: overview,
+    openGraph: {
+      images: [image_url],
+    },
+  };
+}
+
 export default async function MovieDtail({
   params,
 }: {
